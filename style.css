@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    background: #3b546cb9;
     margin: 0;
     padding: 0;
   }
@@ -8,15 +8,15 @@ body {
   .container {
     max-width: 700px;
     margin: 40px auto;
-    background: white;
+    background: rgba(31, 113, 160, 0.142);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgb(177, 197, 208);
   }
   
   h1 {
     text-align: center;
-    color: #333;
+    color: #ffffff;
   }
   
   form {
