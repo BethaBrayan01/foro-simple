@@ -19,3 +19,390 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        body {
+            background-color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: floatUp 4s ease-in-out forwards;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 4px;
+            position: relative;
+            transition: all 0.5s ease;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .main-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .main-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .main-button:hover::before {
+            left: 100%;
+        }
+        
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card.animate-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        
+        .card h3 {
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .card p {
+            color: var(--light);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px var(--primary);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--primary), 0 0 40px var(--secondary);
+            }
+            100% {
+                box-shadow: 0 0 5px var(--primary);
+            }
+        }
+        
+        .active-mode .logo {
+            animation: textGlow 2s infinite;
+        }
+        
+        @keyframes textGlow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px var(--secondary));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary));
+            }
+        }
+        
+        .card-content {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo-glow" id="logo-glow"></div>
+            <h1 class="logo">SCESI</h1>
+        </div>
+        
+        <p class="subtitle">Sistema de Control y Estadísticas para Integración Git</p>
+        
+        <div class="info-cards">
+            <div class="card" id="card1">
+                <div class="card-content">
+                    <h3>Repositorios</h3>
+                    <p>Gestiona tus repositorios Git locales y remotos con facilidad. Sincroniza cambios y mantén un control total sobre tus proyectos.</p>
+                </div>
+            </div>
+            
+            <div class="card" id="card2">
+                <div class="card-content">
+                    <h3>Estadísticas</h3>
+                    <p>Visualiza datos sobre commits, ramas, contribuidores y más. Obtén información valiosa sobre el progreso de tu proyecto.</p>
+                </div>
+            </div>
+            
+            <div class="card" id="card3">
+                <div class="card-content">
+                    <h3>Historial</h3>
+                    <p>Revisa el historial de cambios completo. Navega entre versiones anteriores y compara diferencias entre commits.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="main-button" id="activate-button">Activar Sistema</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activateButton = document.getElementById('activate-button');
+            const container = document.querySelector('.container');
+            const cards = document.querySelectorAll('.card');
+            const logo = document.querySelector('.logo');
+            const logoGlow = document.getElementById('logo-glow');
+            const particles = document.getElementById('particles');
+            
+            let isActive = false;
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 20 + 5;
+                const posX = Math.random() * window.innerWidth;
+                const posY = window.innerHeight;
+                const duration = Math.random() * 3 + 2;
+                const hue = Math.floor(Math.random() * 360);
+                
+                // Set particle style
+                particle.style.width = ${size}px;
+                particle.style.height = ${size}px;
+                particle.style.left = ${posX}px;
+                particle.style.bottom = '0';
+                particle.style.backgroundColor = hsla(${hue}, 100%, 60%, 0.8);
+                particle.style.animationDuration = ${duration}s;
+                
+                particles.appendChild(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode === particles) {
+                        particles.removeChild(particle);
+                    }
+                }, duration * 1000);
+            }
+            
+            function toggleParticles() {
+                if (isActive) {
+                    particles.style.opacity = '1';
+                    // Create particles continuously
+                    particleInterval = setInterval(() => {
+                        for (let i = 0; i < 3; i++) {
+                            createParticle();
+                        }
+                    }, 200);
+                } else {
+                    particles.style.opacity = '0';
+                    clearInterval(particleInterval);
+                }
+            }
+            
+            function animateCards() {
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.toggle('animate-out');
+                        
+                        // Reset card after animation
+                        setTimeout(() => {
+                            if (isActive) {
+                                // Change content before bringing back
+                                const contents = [
+                                    {
+                                        title: "Commits",
+                                        text: "346 commits realizados en el último mes. La productividad ha aumentado un 23% comparado con el periodo anterior."
+                                    },
+                                    {
+                                        title: "Ramas",
+                                        text: "12 ramas activas. La rama 'desarrollo' tiene 87 commits por delante de 'main'. Se recomienda fusionar pronto."
+                                    },
+                                    {
+                                        title: "Colaboradores",
+                                        text: "8 colaboradores activos. El más productivo: usuario325 con 124 commits este mes en 3 repositorios diferentes."
+                                    }
+                                ];
+                                
+                                const cardContent = card.querySelector('.card-content');
+                                const h3 = cardContent.querySelector('h3');
+                                const p = cardContent.querySelector('p');
+                                
+                                h3.textContent = contents[index].title;
+                                p.textContent = contents[index].text;
+                            }
+                            
+                            card.classList.toggle('animate-out');
+                        }, 800);
+                    }, index * 200);
+                });
+            }
+            
+            let particleInterval;
+            
+            activateButton.addEventListener('click', function() {
+                isActive = !isActive;
+                
+                // Toggle active class
+                container.classList.toggle('active-mode');
+                
+                // Toggle button text
+                activateButton.textContent = isActive ? 'Desactivar Sistema' : 'Activar Sistema';
+                
+                // Animate logo
+                if (isActive) {
+                    logo.style.background = 'linear-gradient(45deg, #ff4e50, #f9d423)';
+                    logoGlow.style.opacity = '1';
+                    logoGlow.style.background = 'radial-gradient(circle, rgba(255, 78, 80, 0.6) 0%, rgba(0, 0, 0, 0) 70%)';
+                } else {
+                    logo.style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
+                    logoGlow.style.opacity = '0';
+                }
+                
+                // Animate cards
+                animateCards();
+                
+                // Toggle particles
+                toggleParticles();
+            });
+            
+            // Add hover effect to cards
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!isActive) return;
+                    
+                    card.style.transform = 'translateY(-10px) scale(1.05)';
+                    card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+                    card.style.background = 'rgba(255, 255, 255, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = 'translateY(0) scale(1)';
+                    card.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.1)';
+                    card.style.background = 'rgba(255, 255, 255, 0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
